@@ -91,4 +91,3 @@ getInt(const char *arg, int flags, const char *name)
 
     return (int) res;
 }
-

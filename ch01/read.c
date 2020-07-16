@@ -8,7 +8,7 @@ void print(char *c);
 
 int main(){
     char buf[MAX_READ];
-    char *f_name = "/home/sal/Documents/apue/ch01/copy.c";
+    char *f_name = "ch01/copy.c";
     int fd = open(f_name, O_RDONLY);
     if(fd == -1)
         errExit("open");

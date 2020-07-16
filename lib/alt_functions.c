@@ -45,4 +45,3 @@ ALT_posix_openpt(int flags)
 {
     return open("/dev/ptmx", flags);
 }
-

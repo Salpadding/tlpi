@@ -9,11 +9,11 @@ int str_len(char *c);
 
 int main(){
 
-    char *f_name = "/home/sal/Documents/apue/ch01/write.o";
-    int fd = open(f_name, O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    char *f_name = "ch01/hello_world.json";
+    int fd = open(f_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if(fd == -1)
         errExit("open");
-    char *content = "hello world";
+    char *content = "{\"hello world\" : 0 }";
     int padding = 0;
     lseek(fd, padding, SEEK_SET);
 
