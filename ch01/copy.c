@@ -1,7 +1,6 @@
 
 
 /* copy.c
-
    Copy the file named argv[1] to a new file named in argv[2].
 */
 #include <sys/stat.h>
