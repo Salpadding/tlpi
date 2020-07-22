@@ -6,14 +6,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/wait.h>
-#include "../lib/tlpi_hdr.h"
 #include <stdio.h>
+#include "../lib/tlpi_hdr.h"
 
 int
 main(int argc, char *argv[])
 {
     int fd, flags;
-    char *template = "/tmp/testXXXXXX";
+    char template[] = "/tmp/testXXXXXX";
 
     setbuf(stdout, NULL);                   /* Disable buffering of stdout */
 
@@ -24,8 +24,7 @@ main(int argc, char *argv[])
     if (fd == -1)
         errExit("mkstemp");
 
-    printf("filename = %s\n,", template);
-
+    printf("filename = %s\n", template);
     printf("File offset before fork(): %lld\n",
             (long long) lseek(fd, 0, SEEK_CUR));
 
@@ -42,6 +41,7 @@ main(int argc, char *argv[])
     case 0:     /* Child: change file offset and status flags */
         if (lseek(fd, 1000, SEEK_SET) == -1)
             errExit("lseek");
+        printf("I'm child process\n");
 
         flags = fcntl(fd, F_GETFL);         /* Fetch current flags */
         if (flags == -1)
