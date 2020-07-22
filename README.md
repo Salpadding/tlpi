@@ -1,2 +1,0 @@
-# tlpi
-tlpi examples
