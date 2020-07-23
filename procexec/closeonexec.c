@@ -8,23 +8,31 @@
 * the file COPYING.gpl-v3 for details.                                    *
 \*************************************************************************/
 
-/* t_execl.c
+/* closeonexec.c
 
-   Demonstrate the use of execl() to execute printenv(1).
+   Demonstrate retrieving and updating of the file descriptor
+   close-on-exec flag.
 */
-#include <stdlib.h>
+#include <fcntl.h>
 #include "../lib/tlpi_hdr.h"
 
 int
 main(int argc, char *argv[])
 {
-    printf("Initial value of USER: %s\n", getenv("USER"));
-    if (putenv("USER=britta") != 0)
-        errExit("putenv");
+    int flags;
 
-    /* exec printenv to display the USER and SHELL environment vars */
+    if (argc > 1) {
+        flags = fcntl(STDOUT_FILENO, F_GETFD);              /* Fetch flags */
+        if (flags == -1)
+            errExit("fcntl - F_GETFD");
 
-    execl("/usr/bin/printenv", "printenv", "USER", "SHELL", (char *) NULL);
-    printf("execl success\n");
-    errExit("execl");           /* If we get here, something went wrong */
+        /* Turn on FD_CLOEXEC */
+        flags |= FD_CLOEXEC;                    
+
+        if (fcntl(STDOUT_FILENO, F_SETFD, flags) == -1)     /* Update flags */
+            errExit("fcntl - F_SETFD");
+    }
+
+    execlp("ls", "ls", "-l", argv[0], (char *) NULL);
+    errExit("execlp");
 }
