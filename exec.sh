@@ -8,5 +8,5 @@ fi
 NAME=$1
 DIRNAME=`dirname "${NAME}"`
 FILENAME=`basename "${NAME}"`
-gcc "${NAME}.c"  lib/*.c -o "${FILENAME}.o" "${OPT}"
+gcc -pthread "${NAME}.c"  lib/*.c -o "${FILENAME}.o"
 ./"${FILENAME}.o"
