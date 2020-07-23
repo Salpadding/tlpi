@@ -19,6 +19,6 @@ main(int argc, char *argv[])
 {
     char *envVec[] = { "GREET=salut", "BYE=adieu", NULL };
 
-    execle("echo", "hello world", "goodbye", (char *) NULL, envVec);
+    execle("echo", "echo", "hello world", "goodbye", (char *) NULL, envVec);
     /* If we get here, something went wrong */
 }
