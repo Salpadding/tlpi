@@ -48,7 +48,6 @@ main(int argc, char *argv[])
         if (write(outputFd, buf, numRead) != numRead)
             fatal("write() returned error or partial write occurred");
 
-
     close(inputFd);
     
     close(outputFd) == -1;
